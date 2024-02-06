@@ -1,30 +1,21 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Integrate Shaka Player in React
 
-Currently, two official plugins are available:
+## How to run
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+#### Using custom video stream
 
-## Expanding the ESLint configuration
+    01. Run `yarn install` to install dependencies.
+    02. Change the `manifestUri` in App.tsx to the desired .mpd file url
+    03. Run `yarn dev` to start the app.
+    04. Open the browser, go to the app localhost url and watch the video.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+#### Using local stream
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+    01. Go to `server` directory.
+    02. Run `yarn install` to install dependencies.
+    03. Run `yarn generate:serve` to generate chunks from Intro.mp4 and then serve using http-server at localhost:8080.
+    04. Go to `shaka-player-test`
+    05. Run `yarn install` to install dependencies.
+    06. Run `yarn dev` to start the app.
+    07. Open the browser, go to the app localhost url and watch the video.
