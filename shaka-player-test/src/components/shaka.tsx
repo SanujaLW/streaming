@@ -10,24 +10,26 @@ export function Shaka({manifestUri }: ShakaProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const initVideo = async () => {
-    if(!videoLoaded && manifestUri) {
-      const video = videoRef.current;
+    const videoElem = videoRef.current
+    if(videoElem && !videoLoaded && manifestUri) {
       const player = new shaka.Player();
-      await player.attach(video);
-  
+      await player.attach(videoElem);
+
       (window as any).player = player;
   
       player.addEventListener('error', console.error);
-  
       try {
         await player.load(manifestUri);
+        setVideoLoaded(true)
       } catch (e) {
         console.error(e)
       }
     }
   }
 
-  initVideo()
+  useEffect(() => {
+    initVideo()
+  }, [manifestUri, videoLoaded])
 
   useEffect(() => {
     shaka.polyfill.installAll();
@@ -37,10 +39,8 @@ export function Shaka({manifestUri }: ShakaProps) {
   }, [])
 
   return (
-    <div>
-      <video ref={videoRef}>
+      <video autoPlay={true} controls={true} ref={videoRef}>
 
       </video>
-    </div>
   );
 }
